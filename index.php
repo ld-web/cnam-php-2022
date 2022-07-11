@@ -45,4 +45,7 @@ echo "<br />";
 echo 'L\'ami ' . $name . ' ' . $firstname . ' a ' . $age . ' ans';
 
 // Constante - On fixe une et une seule fois une valeur
-const APP_VERSION = "1.2.5";
+echo "<br />";
+const APP_VERSION = "1.2.6";
+
+echo "Version : " . APP_VERSION;
