@@ -49,3 +49,13 @@ echo "<br />";
 const APP_VERSION = "1.2.6";
 
 echo "Version : " . APP_VERSION;
+
+// Comparaison avec == et === (strict)
+var_dump(2 == 2);
+var_dump(2 == 3);
+
+var_dump(2 == "2");
+var_dump(2 === "2");
+
+var_dump(0 == false);
+var_dump(0 === false);
