@@ -1,0 +1,25 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+#wrapper {
+  max-width: 900px;
+  margin: auto;
+}
+
+.list {
+  display: flex;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.item {
+  width: 350px;
+  padding: 1em;
+  box-shadow: 0 0 12px 1px rgb(0 0 0 / 27%);
+}

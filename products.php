@@ -43,6 +43,12 @@ $products = [
     "price" => 412.4,
     "color" => "YkHxnrdzS",
   ],
+  [
+    "id" => 8,
+    "name" => "CNAM",
+    "price" => 350,
+    "color" => "blue",
+  ],
 ];
 ?>
 <!DOCTYPE html>
@@ -53,16 +59,28 @@ $products = [
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nos produits</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="products.css">
 </head>
 
 <body>
-  <h1>Nos produits</h1>
+  <div id="wrapper">
+    <h1>Nos produits</h1>
 
-  <!-- Liste des produits -->
-  <div class="list">
-    <?php foreach ($products as $product) {
-      echo $product['name'] . "<br />";
-    } ?>
+    <!-- Liste des produits -->
+    <section class="list">
+      <?php foreach ($products as $product) { ?>
+        <article class="item">
+          <h2><?php echo $product['name']; ?></h2>
+          <h3><?php echo $product['price']; ?>€</h3>
+          <p>
+            <?php echo $product['color']; ?>
+          </p>
+        </article>
+      <?php } ?>
+    </section>
   </div>
 </body>
 
