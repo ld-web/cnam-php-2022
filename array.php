@@ -1,7 +1,7 @@
 <?php
 echo "<h1>Boucles</h1>";
 // Tableau = array
-$array = [1, 1, "test", true, "coucou"];
+$array = [1, "test", 1, true, "coucou"];
 // Affiche à l'écran le contenu d'une variable
 // Attention, cette fonction affiche le contenu de manière brute
 // Elle ne doit donc pas être utilisée en production
@@ -44,4 +44,24 @@ do {
 echo "<h2>Boucle foreach</h2>";
 foreach ($array as $item) {
   echo $item . "<br />";
+}
+
+// Tableau associatif
+echo "<h2>Tableau associatif</h2>";
+
+$associativeArray = [
+  1 => "CNAM",
+  5 => "hello",
+  "name" => "Johnny"
+];
+var_dump($associativeArray);
+
+$associativeArray[1] = "Saint-Etienne";
+var_dump($associativeArray);
+
+$associativeArray[3] = "test 3";
+var_dump($associativeArray);
+
+foreach ($associativeArray as $key => $value) {
+  echo $key . " => " . $value . "<br />";
 }
