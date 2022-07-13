@@ -166,3 +166,63 @@ switch ($variable) {
     //le break sur le cas par défaut, qui est le dernier, n'est pas nécessaire
 }
 ```
+
+## Fonctions
+
+Une fonction est une suite d'instructions nommée, qu'on peut appeler partout où on en a besoin.
+
+```php
+<?php
+function maFonction(string $param1, string $param2 = 'defaultValue'): string
+{
+  // Instructions à exécuter
+}
+```
+
+La ligne de définition d'une fonction contient le mot-clé `function`, le nom de la fonction, ses éventuels paramètres, et son type de retour. Il s'agit de la **signature** de la fonction.
+
+### Paramètres, valeurs par défaut
+
+Les paramètres d'une fonction définissent les valeurs qui seront passées en entrée par le code appelant la fonction.
+
+Il est possible de définir des paramètres **facultatifs**, en spécifiant une valeur par défaut.
+
+```php
+<?php
+// Définition de la fonction
+function direBonjour(string $nom = "Sam"): void // signature de la fonction
+{
+  echo "BONJOUR $nom !!!";
+}
+```
+
+Je peux ainsi appeler la fonction avec ou sans paramètre :
+
+```php
+direBonjour("Bob"); // avec un paramètre
+direBonjour(); // sans paramètre : valeur par défaut = "Sam"
+```
+
+> Voir le fichier `functions.php`
+
+### Valeur de retour
+
+Une fonction peut **retourner une valeur** au code appelant, avec l'instruction `return`.
+
+> L'instruction `return`, quand elle est utilisée, **provoque la sortie** de la fonction
+
+```php
+<?php
+function getAsParagraph(string $text): string
+{
+  return "<p>$text</p>";
+  // Après un return, on n'écrit pas de code, car "return" provoque la sortie de la fonction
+}
+```
+
+Dans ce cas, on peut récupérer la valeur retournée dans le code appelant :
+
+```php
+// on récupère et on met dans la variable $paragraph la valeur retournée depuis la fonction paragraphMajuscules
+$paragraph = getAsParagraph("Hello world");
+```
