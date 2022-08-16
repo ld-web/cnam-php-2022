@@ -1,6 +1,7 @@
 <?php
 $color = "yellow"; // <-- peut venir de n'importe où (par l'exemple l'URL)
 
+// Structure de contrôle if
 if ($color === "green") {
   echo "Vert !";
 } elseif ($color === "yellow") {
@@ -11,6 +12,7 @@ if ($color === "green") {
 
 echo "<br />";
 
+// Structure de contrôle switch
 switch ($color) {
   case "green":
   case "vert":
