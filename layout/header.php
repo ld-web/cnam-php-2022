@@ -5,14 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
+  <title><?php echo $title ?? "Mon super site"; ?>
     <?php
-    $defaultTitle = "Mon super site";
-    if (isset($title)) {
-      echo $title;
-    } else {
-      echo $defaultTitle;
-    }
+    //$defaultTitle = "Mon super site";
+
+    // Opérateur ternaire
+    // condition ? expression si vraie : expression si faux
+    //echo isset($title) ? $title : $defaultTitle;
+
+    // if (isset($title)) {
+    //   echo $title;
+    // } else {
+    //   echo $defaultTitle;
+    // }
     ?>
   </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
