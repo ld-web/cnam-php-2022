@@ -17,3 +17,10 @@ $otherProduct = new Product(2); // <-- mot-clé new pour créer un objet
 $otherProduct->setPrice(400);
 var_dump($otherProduct->ttcPrice());
 var_dump($otherProduct);
+
+require_once 'User.php';
+
+$user = new User();
+$user->setAge(52);
+var_dump($user);
+var_dump($user->isMajeur());
