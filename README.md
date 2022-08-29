@@ -661,3 +661,73 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 ```
 
 On pourra ainsi exploiter chaque `$row` en accédant à ses colonnes via leur nom, comme un tableau associatif (`$row['nom']` par exemple).
+
+#### Requêtes préparées
+
+Utiliser `query` sur une instance de PDO peut être utile pour des requêtes simples ou statiques. Pour des requêtes dynamiques, et particulièrement des requêtes dans lesquelles on va vouloir utiliser des données provenant de l'utilisateur (paramètres GET/POST essentiellement), on va **préparer** la requête au lieu d'utiliser la concaténation.
+
+Dans ce cas-là, le processus va se dérouler en 2 étapes :
+
+- On prépare un `Statement` avec un ou plusieurs **paramètres de requête**
+- On exécute le `Statement` en fournissant les valeurs que doivent prendre les paramètres de requête
+
+```php
+// 1 - Je prépare ma requête
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id=:id");
+// 2 - J'exécute ma requête en fournissant une valeur au(x) paramètre(s)
+$stmt->execute([
+  'id' => $_GET['id']
+]);
+```
+
+> Ceci permet de se protéger contre les injections SQL, très faciles à mettre en oeuvre dans l'URL ou un formulaire
+
+## Sessions
+
+Les sessions permettent au serveur PHP de reconnaître une session de navigation donnée, donc potentiellement un utilisateur connecté. C'est grâce aux sessions, par exemple, qu'une fois connecté, on n'a pas besoin de se reconnecter à chaque page consultée.
+
+L'identification d'une sessions par le serveur s'effectue par la lecture d'un **cookie**.
+
+Par défaut, ce cookie sera nommé `PHPSESSID`, et contient une valeur aléatoire : l'identifiant de session.
+
+Côté serveur, s'il identifie avec succès un `PHPSESSID`, alors il sera capable de restituer un contexte (un tableau de clés/valeurs) préalablement défini, et qu'on peut faire évoluer au fil des pages consultées.
+
+Ainsi, une session peut suivre un utilisateur durant toute sa navigation sur notre application.
+
+Les sessions permettent de fournir des fonctionnalités comme l'authentification ou un panier de produits par exemple.
+
+### Démarrer une sessions
+
+Pour utiliser les sessions dans notre application, il est obligatoire d'utiliser en premier lieu la fonction `session_start()` de la SPL.
+
+Si aucune session n'était démarrée, le serveur crée un nouvel identifiant de session et le cookie associé pour le renvoyer au navigateur. Il initialise également la variable superglobale `$_SESSION`, vide par défaut.
+
+S'il existait déjà une session stockée sur le serveur, alors le serveur restitue le tableau `$_SESSION` avec les paires de clés/valeurs que l'on a pu définir pour cet utilisateur (connecté ? Est-ce qu'il y a un panier ? Avec quel(s) produit(s) dedans ? Etc...).
+
+```php
+// 1ère exécution : création d'un identifiant de session
+// exécutions suivantes : lecture du cookie PHPSESSID et restitution de la session
+// Attention : si on n'utilise pas session_start(), le tableau $_SESSION n'est pas défini !
+session_start();
+
+// Ici, $_SESSION est vide
+var_dump($_SESSION);
+
+$_SESSION['connected'] = false;
+
+// A présent, $_SESSION contient une clé "connected" associée à la valeur false
+// Si on recharge la page, alors le var_dump d'avant, qui présentait une session vide, présentera à présent le tableau contenant déjà la clé "connected"
+var_dump($_SESSION);
+```
+
+> Note importante : si vous appelez `session_start()` plusieurs fois, une erreur sera générée par PHP. Veillez à l'appeler une et une seule fois au début de l'exécution de votre script. Vous pouvez également vous documenter pour trouver un moyen de vérifier si une session a déjà été démarrée, et la démarrer si ce n'est pas le cas
+
+### Détruire une session
+
+Pour mettre fin à une session (déconnexion de l'utilisateur par exemple), on va dans un premier temp vider le tableau superglobal `$_SESSION`, puis détruire la session avec une méthode de la SPL :
+
+```php
+session_start(); // Bien penser à utiliser session_start
+$_SESSION = [];
+session_destroy();
+```
