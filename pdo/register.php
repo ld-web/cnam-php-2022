@@ -4,16 +4,19 @@ if (
   !empty($_POST) &&
   !empty($_POST['name']) && // Validation : champ requis
   !empty($_POST['firstname']) &&
+  !empty($_POST['password']) &&
   !empty($_POST['email']) &&
   filter_var($_POST['email'], FILTER_VALIDATE_EMAIL) !== false // Vérifier le format de l'email
 ) {
   // Récupération des données de formulaire
   $name = $_POST['name'];
   $firstname = $_POST['firstname'];
+  $passwordHash = password_hash($_POST['password'], PASSWORD_BCRYPT, ['cost' => 15]);
   $email = $_POST['email'];
 
   var_dump($name);
   var_dump($firstname);
+  var_dump($passwordHash);
   var_dump($email);
 
   require_once 'db.php';
@@ -25,10 +28,11 @@ if (
   // ('$name', '$firstname', '$email')";
 
   // Requête préparée
-  $stmt = $pdo->prepare("INSERT INTO users (name, firstname, email) VALUES (:name, :firstname, :email)");
+  $stmt = $pdo->prepare("INSERT INTO users (name, firstname, password, email) VALUES (:name, :firstname, :password, :email)");
   $res = $stmt->execute([
     "name" => $name,
     "firstname" => $firstname,
+    "password" => $passwordHash,
     "email" => $email
   ]);
 
@@ -58,6 +62,10 @@ if (
     <div>
       <label for="firstname">Prénom</label>
       <input type="text" name="firstname" id="firstname" />
+    </div>
+    <div>
+      <label for="password">Mot de passe</label>
+      <input type="password" name="password" id="password" />
     </div>
     <div>
       <label for="email">Email</label>
