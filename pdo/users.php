@@ -1,12 +1,8 @@
 <?php
 // LISTE UTILISATEURS
 
-// Création de la connexion à la base de données
-$pdo = new PDO(
-  "mysql:host=127.0.0.1;dbname=cnam-php-2022;charset=utf8mb4",
-  "cnam-php-2022",
-  "YfIbuy151ESIejLI"
-);
+require_once 'db.php';
+$pdo = getPdoInstance();
 
 $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

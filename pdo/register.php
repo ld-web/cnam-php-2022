@@ -12,12 +12,8 @@ if (
   $firstname = $_POST['firstname'];
   $email = $_POST['email'];
 
-  // Création de la connexion à la base de données
-  $pdo = new PDO(
-    "mysql:host=127.0.0.1;dbname=cnam-php-2022;charset=utf8mb4",
-    "cnam-php-2022",
-    "YfIbuy151ESIejLI"
-  );
+  require_once 'db.php';
+  $pdo = getPdoInstance();
 
   // Définition de la requête
   $query = "INSERT INTO `users`(`name`, `firstname`, `email`) VALUES
