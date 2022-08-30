@@ -707,7 +707,7 @@ Ainsi, une session peut suivre un utilisateur durant toute sa navigation sur not
 
 Les sessions permettent de fournir des fonctionnalités comme l'authentification ou un panier de produits par exemple.
 
-### Démarrer une sessions
+### Démarrer une session
 
 Pour utiliser les sessions dans notre application, il est obligatoire d'utiliser en premier lieu la fonction `session_start()` de la SPL.
 
