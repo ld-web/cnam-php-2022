@@ -12,15 +12,28 @@ if (
   $firstname = $_POST['firstname'];
   $email = $_POST['email'];
 
+  var_dump($name);
+  var_dump($firstname);
+  var_dump($email);
+
   require_once 'db.php';
   $pdo = getPdoInstance();
 
   // Définition de la requête
-  $query = "INSERT INTO `users`(`name`, `firstname`, `email`) VALUES
-  ('$name', '$firstname', '$email')";
+  // Requête non préparée (dangereux, car vulnérable aux injections SQL)
+  // $query = "INSERT INTO `users`(`name`, `firstname`, `email`) VALUES
+  // ('$name', '$firstname', '$email')";
+
+  // Requête préparée
+  $stmt = $pdo->prepare("INSERT INTO users (name, firstname, email) VALUES (:name, :firstname, :email)");
+  $res = $stmt->execute([
+    "name" => $name,
+    "firstname" => $firstname,
+    "email" => $email
+  ]);
 
   // Exécution de la requête
-  $res = $pdo->query($query);
+  // $res = $pdo->query($query);
   var_dump($res);
 }
 ?>
