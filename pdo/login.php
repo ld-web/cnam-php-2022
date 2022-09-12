@@ -1,3 +1,4 @@
+<?php require_once 'functions.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +11,12 @@
 
 <body>
   <h1>Connexion</h1>
+
+  <?php if (isset($_GET['errorCode'])) { ?>
+    <div style="font-weight: bold; color: red;">
+      <?php echo getErrorMessage($_GET['errorCode']); ?>
+    </div>
+  <?php } ?>
 
   <form action="auth.php" method="post">
     <div>
