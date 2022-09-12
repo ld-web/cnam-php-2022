@@ -3,7 +3,7 @@
 function getPdoInstance(): PDO
 {
   $dbParams = parse_ini_file("db.ini");
-  var_dump($dbParams);
+  //var_dump($dbParams);
 
   $dsn = "mysql:host=" . $dbParams['DB_HOST'] .
     ";dbname=" . $dbParams['DB_NAME'] .
